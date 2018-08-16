@@ -116,6 +116,7 @@ void setup()
   myMax.begin();
   Goble.begin();
   Serial.begin(115200); // 打开串口，设置速率为115200 bps
+  delay(500);
 
   myMax.displayEmoticons(0x14);//显示表情符号
   myMax.setColor(0x05); //设置颜色
