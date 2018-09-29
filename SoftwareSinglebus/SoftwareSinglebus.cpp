@@ -313,7 +313,7 @@ void SoftwareSinglebus::setTX(uint8_t tx)
 	// the pin would be output low for a short while before switching to
 	// output hihg. Now, it is input with pullup for a short while, which
 	// is fine. With inverse logic, either order is fine.
-	digitalWrite1(tx, _inverse_logic ? LOW : HIGH);
+	digitalWrite(tx, _inverse_logic ? LOW : HIGH);
 	pinMode(tx, OUTPUT);
 	transmitBitMask = digitalPinToBitMask(tx);
 	uint8_t port = digitalPinToPort(tx);
@@ -324,7 +324,7 @@ void SoftwareSinglebus::setRX(uint8_t rx)
 {
 	pinMode(rx, INPUT);
 	if (!_inverse_logic)
-		digitalWrite1(rx, HIGH);  // pullup for normal logic!
+		digitalWrite(rx, HIGH);  // pullup for normal logic!
 	transmitPin = rx;
 	receiveBitMask = digitalPinToBitMask(rx);
 	uint8_t port = digitalPinToPort(rx);
@@ -395,7 +395,7 @@ void SoftwareSinglebus::begin(){
 	active_object = this;
 	pinMode(transmitPin, OUTPUT);
 	if (!_inverse_logic)
-		digitalWrite1(transmitPin, HIGH);
+		digitalWrite(transmitPin, HIGH);
 	attachInterrupt(0, SoftwareSinglebus::handle_interrupt, 3);
 }
 #endif
@@ -407,7 +407,7 @@ void SoftwareSinglebus::end(){
 char SoftwareSinglebus::checkBus(){
 	uint8_t m = _POLLDELAY_;
 	for (; m; m--){
-		if (digitalRead1(transmitPin) == LOW){
+		if (digitalRead(transmitPin) == LOW){
 			return false;
 		}
 		asm volatile("nop"); asm volatile("nop"); asm volatile("nop"); asm volatile("nop");
