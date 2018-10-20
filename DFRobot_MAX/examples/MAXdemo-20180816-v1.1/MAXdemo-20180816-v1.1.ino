@@ -345,12 +345,12 @@ void loop()
   {
     if (Goble.available())//读取蓝牙数据
     {
-      buttonState[SWITCH_UP]     = Goble.readSwitchUp();
-      buttonState[SWITCH_DOWN]   = Goble.readSwitchDown();
-      buttonState[SWITCH_LEFT]   = Goble.readSwitchLeft();
-      buttonState[SWITCH_RIGHT]  = Goble.readSwitchRight();
-      buttonState[SWITCH_SELECT] = Goble.readSwitchSelect();
-      buttonState[SWITCH_START]  = Goble.readSwitchStart();
+      buttonState[SWITCH_UP]     = !Goble.readSwitchUp();
+      buttonState[SWITCH_DOWN]   = !Goble.readSwitchDown();
+      buttonState[SWITCH_LEFT]   = !Goble.readSwitchLeft();
+      buttonState[SWITCH_RIGHT]  = !Goble.readSwitchRight();
+      buttonState[SWITCH_SELECT] = !Goble.readSwitchSelect();
+      buttonState[SWITCH_START]  = !Goble.readSwitchStart();
 
       for(int j = 1; j < 7; j++)
         if (buttonState[j] == PRESSED) { Mark_1 = j; break; }//向前

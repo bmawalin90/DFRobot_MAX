@@ -13,7 +13,6 @@ _GoBLE::_GoBLE() {
 }
 
 void _GoBLE::begin() {
-  Serial.begin(115200);
   initRecvDataPack();
   
   _joystickX = 127;
@@ -79,34 +78,42 @@ boolean _GoBLE::available() {
 
 
 int _GoBLE::readJoystickX() {
+  this->available();
   return  _joystickX;
 }
 int _GoBLE::readJoystickY() {
+  this->available();
   return  _joystickY;
 }
 
 boolean _GoBLE::readSwitchUp() {
-  return _button[SWITCH_UP];
+  this->available();
+  return !_button[SWITCH_UP];
 }
 
 boolean _GoBLE::readSwitchDown() {
-  return _button[SWITCH_DOWN];
+  this->available();
+  return !_button[SWITCH_DOWN];
 }
 
 boolean _GoBLE::readSwitchLeft() {
-  return _button[SWITCH_LEFT];
+  this->available();
+  return !_button[SWITCH_LEFT];
 }
 
 boolean _GoBLE::readSwitchRight() {
-  return _button[SWITCH_RIGHT];
+  this->available();
+  return !_button[SWITCH_RIGHT];
 }
 
 boolean _GoBLE::readSwitchSelect() {
-  return _button[SWITCH_SELECT];
+  this->available();
+  return !_button[SWITCH_SELECT];
 }
 
 boolean _GoBLE::readSwitchStart() {
-  return _button[SWITCH_START];
+  this->available();
+  return !_button[SWITCH_START];
 }
 
 // Private functions
